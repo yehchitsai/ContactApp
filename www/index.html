@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+<!-- from contact souce code -->
+		<link type="text\css" rel="stylesheet" href="css\themes\default\jquery.mobile-1.2.1.min.css">
+		<script src="js\jquery-1.7.1.min.js"></script>
+		<script src="js\jquery.mobile-1.2.1.min.js"></script>
+		
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Hello World</title>
+    </head>
+<body>
+	<div data-role="page">
+		<div data-role="header">
+			<h3>系友追蹤系統</h3>
+		</div>
+	  
+		<div data-role="content">
+			<div id="page1">		
+				<div id="shipDiv" data-role="fieldcontain">
+					<label for="type">搜尋條件: </label></br>
+					<select id="type">
+						<option value="姓名">姓名</option>
+						<option value="學號">學號</option>
+						<option value="工作經歷">工作經歷</option>
+						<option value="專題老師">專題老師</option>
+					</select>			
+				</div>
+				<div id="fnameDiv" data-role="fieldcontain">
+					<label for="key">關鍵字: </label></br>		
+					<input type="text" id="key" name="key"/>
+				</div>			
+				<div id="submitDiv" data-role="fieldcontain">    
+					<a value="送出" id="submit" data-role="button" data-inline="true">送出</a>
+				</div>  
+			</div>
+		
+			<div id="page2">
+				<h3 id="p2l1">搜尋條件：</h3>
+				<h3 id="p2l2">關鍵字：林</h3>
+				<a href="#" data-role="button" id="back" >回前頁</a>
+				<ul id="p2l3" data-role="listview" data-inset="true"
+					data-theme="c" data-dividertheme="a">			   
+				</ul>	
+			</div>
+		
+			<div id="page3">
+				<div id="detail">
+				</div>			
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#" id ="back2" data-role="button">回前頁</a>		
+					<a href="#" id="home" data-role="button">回首頁</a>
+				</div>
+			</div>
+		
+		</div>  
+ 
+		<div data-role="footer" data-position="fixed">
+			<h3>實踐大學高雄校區資訊管理系</h3>
+		</div>
+	</div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
