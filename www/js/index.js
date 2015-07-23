@@ -58,59 +58,57 @@ function showloader(){
 		html: ""
 	});
 }
+
 function hideloader(){			
 	$.mobile.loading('hide');
 }
 
 $(document).ready(function(){	
-	//$(this).ajaxStart(showloader()).ajaxStop(hideloader());	
-	$("#page2").hide();
-	$("#page3").hide();
+
+	$("#list").hide();
+	$("#result").hide();
+	
 	$("#submit").click(function(){
 		showloader();	
-		$("#p2l1").empty().append("搜尋條件："+$('#type').val());
-		$("#p2l2").empty().append("關鍵字："+$('#key').val());
+		$("#searchType").empty().append("搜尋條件："+$('#type').val());
+		$("#searchKey").empty().append("關鍵字："+$('#key').val());
 		var typeval = $('#type').val();
 		var keyval = $('#key').val();
-		//console.log(keyval);
-		$.post('http://localhost/ContactCI/Contact/test',
+		$.post('http://163.15.192.212/ContactCI/Contact/namelist',
 			{
-				key : keyval,
-				type : typeval
+				type : typeval,
+				key : keyval
 			},function( data ) {				
-				var listItems = "<li id='title' data-role='list-divider' >搜尋結果</li>";
-				console.log(data);
+				var listItems = "<li id='none' data-role='list-divider' >搜尋結果</li>";
 				var list = JSON.parse(data);				
 				for(var value in list){
-					//console.log(value + list[value][0]);
-					listItems += "<li><a href='#' id='"+list[value][1]+"'>"+list[value][0]+"</a></li>";
+					listItems += "<li><a href='#' id='"+list[value][0]+"'>"+list[value][1]+"</a></li>";
 				}
-				$("#p2l3").html(listItems);
-				$("#p2l3").listview('refresh');
-				$("#page1").hide();
-				$("#page2").show();
+				$("#nameList").html(listItems);
+				$("#nameList").listview('refresh');
+				$("#search").hide();
+				$("#list").show();
 				hideloader();	
 		});
-		//return false;
 	});
-	$("#p2l3").click(function(event){
-		if(event.target.id!='title'){
+	
+	$("#nameList").click(function(event){
+		if(event.target.id!='none'){
 			showloader();
 			var stuid = event.target.id;
-			$.post('http://localhost/ContactCI/Contact/test2',
+			$.post('http://163.15.192.212/ContactCI/Contact/detail',
 			{
-				stu : stuid
+				stu_id : stuid
 			},function( data ){				
 				var detail = JSON.parse(data);
-				console.log(detail);
-				var detailitem = "<img src="+detail['url']+"><h3>學號："+detail['student'][0]+"</h3><h3>姓名："+detail['student'][1]+"</h3><h3>Email：<a href='mailto:"+detail['student'][3]+
-					"'>"+detail['student'][4]+"</a></h3><h3>專題老師："+detail['student'][2]+"</h3><h3>專題題目："+detail['student'][3]+"</h3><h3 style='color:blue'>facebook</h3>";					
+				var detailitem = "<img src="+detail['photo']+"><h3>學號："+detail['studata'][0]+"</h3><h3>姓名："+detail['studata'][1]+"</h3><h3>Email：<a href='mailto:"+detail['studata'][2]+
+					"'>"+detail['studata'][2]+"</a></h3><h3 style='color:blue'>facebook</h3>";					
 				if(typeof detail['facebook'][0]['uid'][0]!='undefined'){				
 					var fbdetail = detail['facebook'];				
 					for(var value in fbdetail){
 						
 						detailitem += "<h3>facebook名稱：<a href='http://www.facebook.com/"+fbdetail[value]['uid'][0]+"'>"+fbdetail[value]['uid'][1]+
-							"</a><h3><h3>家鄉："+fbdetail[value]['location'][1]+"</h3><h3>現居城市："+fbdetail[value]['location'][0]+
+							"</a></h3><h3>家鄉："+fbdetail[value]['location'][1]+"</h3><h3>現居城市："+fbdetail[value]['location'][0]+
 							"</h3><h3>傳送訊息：<a href='mailto:"+fbdetail[value]['uid'][0]+
 							"@facebook.com'>點此以Email傳送</a></h3><div data-role='collapsible' data-collapsed='true'><h4>工作經歷</h4>";
 						
@@ -125,21 +123,24 @@ $(document).ready(function(){
 				}		
 				$("#detail").html(detailitem).trigger( "create" );				
 			});
-			$("#page2").hide();
-			$("#page3").show();
+			$("#list").hide();
+			$("#result").show();
 			hideloader();			
 		}
 	});
-	$("#back").click(function(){		
-		$("#page2").hide();
-		$("#page1").show();
+	
+	$("#list_search").click(function(){		
+		$("#list").hide();
+		$("#search").show();
 	});
-	$("#back2").click(function(){		
-		$("#page2").show();
-		$("#page3").hide();
+	
+	$("#result_list").click(function(){		
+		$("#result").hide();
+		$("#list").show();
 	});
-	$("#home").click(function(){		
-		$("#page3").hide();
-		$("#page1").show();
+	
+	$("#result_search").click(function(){		
+		$("#result").hide();
+		$("#search").show();
 	});
 });
