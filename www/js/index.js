@@ -64,17 +64,17 @@ function hideloader(){
 }
 
 $(document).ready(function(){	
-
+	$("#search").hide();
 	$("#list").hide();
 	$("#result").hide();
 	
 	$("#submit").click(function(){
-		showloader();	
+		showloader();
 		$("#searchType").empty().append("搜尋條件："+$('#type').val());
 		$("#searchKey").empty().append("關鍵字："+$('#key').val());
 		var typeval = $('#type').val();
 		var keyval = $('#key').val();
-		$.post('http://163.15.192.212/ContactCI/Contact/namelist',
+		$.post('http://localhost/ContactCI/Contact/namelist',
 			{
 				type : typeval,
 				key : keyval
@@ -96,13 +96,13 @@ $(document).ready(function(){
 		if(event.target.id!='none'){
 			showloader();
 			var stuid = event.target.id;
-			$.post('http://163.15.192.212/ContactCI/Contact/detail',
+			console.log(stuid);
+			$.post('http://localhost/ContactCI/Contact/detail',
 			{
 				stu_id : stuid
 			},function( data ){				
 				var detail = JSON.parse(data);
-				var detailitem = "<img src="+detail['photo']+"><h3>學號："+detail['studata'][0]+"</h3><h3>姓名："+detail['studata'][1]+"</h3><h3>Email：<a href='mailto:"+detail['studata'][2]+
-					"'>"+detail['studata'][2]+"</a></h3><h3 style='color:blue'>facebook</h3>";					
+				var detailitem = "<img src="+detail['photo']+"><h3>學號："+detail['studata'][0]+"</h3><h3>姓名："+detail['studata'][1]+"</h3><h3 style='color:blue'>facebook</h3>";					
 				if(typeof detail['facebook'][0]['uid'][0]!='undefined'){				
 					var fbdetail = detail['facebook'];				
 					for(var value in fbdetail){

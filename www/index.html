@@ -35,6 +35,8 @@
 		<!-- from contact souce code -->
 		<link type="text\css" rel="stylesheet" href="css\themes\default\jquery.mobile-1.2.1.min.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+		<script src="js\login.js"></script>
+		<script src="js\app-config.js"></script>
 		<script src="js\jquery-1.7.1.min.js"></script>
 		<script src="js\jquery.mobile-1.2.1.min.js"></script>
         <title>Contact</title>
@@ -46,6 +48,19 @@
 		</div>
 	  
 		<div data-role="content">
+			<div id="login">
+				<div align="center" data-role="fieldcontain">
+					<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin="login()">
+					</div>
+					
+					<div id="fb-root">
+					</div>
+					
+					<div id="status">
+					</div>
+				</div>
+			</div>
+			
 			<div id="search">		
 				<div id="shipDiv" data-role="fieldcontain">
 					<label for="type">搜尋條件: </label></br>
