@@ -48,7 +48,6 @@ function permit() {
 				{
 					$("#login").hide();
 					$("#search").show();
-					console.log('Welcome back.')
 				}
 				else
 				{
