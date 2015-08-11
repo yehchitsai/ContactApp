@@ -96,7 +96,6 @@ $(document).ready(function(){
 		if(event.target.id!='none'){
 			showloader();
 			var stuid = event.target.id;
-			console.log(stuid);
 			$.post('http://localhost/ContactCI/Contact/detail',
 			{
 				stu_id : stuid
