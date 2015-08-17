@@ -101,26 +101,54 @@ $(document).ready(function(){
 				stu_id : stuid
 			},function( data ){				
 				var detail = JSON.parse(data);
-				var detailitem = "<img src="+detail['photo']+"><h3>學號："+detail['studata'][0]+"</h3><h3>姓名："+detail['studata'][1]+"</h3><h3 style='color:blue'>facebook</h3>";					
-				if(typeof detail['facebook'][0]['uid'][0]!='undefined'){				
-					var fbdetail = detail['facebook'];				
-					for(var value in fbdetail){
-						
-						detailitem += "<h3>facebook名稱：<a href='http://www.facebook.com/"+fbdetail[value]['uid'][0]+"'>"+fbdetail[value]['uid'][1]+
-							"</a></h3><h3>家鄉："+fbdetail[value]['location'][1]+"</h3><h3>現居城市："+fbdetail[value]['location'][0]+
-							"</h3><h3>傳送訊息：<a href='mailto:"+fbdetail[value]['uid'][0]+
-							"@facebook.com'>點此以Email傳送</a></h3><div data-role='collapsible' data-collapsed='true'><h4>工作經歷</h4>";
-						
-						for(var value2 in fbdetail[value]['work']){
-							detailitem += "<h3>公司："+fbdetail[value]['work'][value2][1]+"</h3><h3>職位："+fbdetail[value]['work'][value2][2]+
-							"</h3><h3>開始時間："+fbdetail[value]['work'][value2][3]+"</h3><h3>結束時間："+fbdetail[value]['work'][value2][4]+"</h3>"
-						}
-						detailitem += "</div>"
+				console.log(detail['account'][0]['uid'][0]);
+				console.log(detail['account'][0]['education'][0][0]);
+				console.log(detail['account'][0]['education'][0][1]);
+				console.log(detail['account'][0]['education'][0][2]);
+				
+				var detailitem = "<h3>學號："+detail['studata'][0]+"</h3><h3>姓名："+detail['studata'][1]+"</h3><h3>電話："+detail['studata'][2]+"</h3>";
+				if(typeof detail['email'][0]!='undefined'){
+					detailitem += "<div data-role='collapsible' data-collapsed='true'><h4>Email</h4>"
+					for(var value in detail['email']){
+						detailitem += "<h3><a href='mailto:"+detail['email'][value]+"'>"+detail['email'][value]+"</a></h3>"
 					}
-				}else{
-					detailitem +="<h3>尚未加入社團或未建立FACEBOOK資料</h3>"
-				}		
-				$("#detail").html(detailitem).trigger( "create" );				
+					detailitem += "</div>";
+				}
+				else{
+					detailitem += "<h3 style='color:red'>用戶尚未有公開的Email</h3>"
+				}
+				
+				detailitem += "<br><h1 style='color:blue'>facebook資訊</h1>";
+				if(typeof detail['account'][0]['uid'][0]!='undefined'){
+					for(var value in detail['account']){
+						detailitem += "<img src="+detail['account'][value]['facebook'][1]+">";
+						detailitem += "<h3>facebook名稱：<a href='http://www.facebook.com/"+detail['account'][value]['uid'][0]+"'>"+detail['account'][value]['facebook'][0]+"</a></h3>";
+						detailitem += "<h3>家鄉："+detail['account'][value]['facebook'][3]+"</h3><h3>現居城市："+detail['account'][value]['facebook'][2]+"</h3>";
+						
+						detailitem += "<div data-role='collapsible' data-collapsed='true'><h4>工作經歷</h4>";
+						for(var value2 in detail['account'][value]['work']){
+							detailitem += "<h3>公司："+detail['account'][value]['work'][value2][0]+"</h3>";
+							detailitem += "<h3>職位："+detail['account'][value]['work'][value2][1]+"</h3>";
+							detailitem += "<h3>開始時間："+detail['account'][value]['work'][value2][2]+"</h3>";
+							detailitem += "<h3>結束時間："+detail['account'][value]['work'][value2][3]+"</h3>";
+						}
+						detailitem += "</div>";
+						
+						detailitem += "<div data-role='collapsible' data-collapsed='true'><h4>教育程度</h4>";
+						for(var value3 in detail['account'][value]['education']){
+							detailitem += "<h3>學位："+detail['account'][value]['education'][value3][0]+"</h3>";
+							detailitem += "<h3>學校："+detail['account'][value]['education'][value3][1]+"</h3>";
+							detailitem += "<h3>畢業年份："+detail['account'][value]['education'][value3][2]+"</h3>";
+						}
+						detailitem += "</div>";
+					}
+				}
+				else{
+					detailitem +="<h3 style='color:red'>尚未加入社團或未建立FACEBOOK資料</h3>"
+				}
+				
+				$("#detail").html(detailitem).trigger( "create" );	
+			
 			});
 			$("#list").hide();
 			$("#result").show();
