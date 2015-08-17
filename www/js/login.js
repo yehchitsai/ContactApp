@@ -36,22 +36,24 @@ function statusChangeCallback(response) {
 }
 			
 function permit() {
-	console.log('Welcome!  Fetching your information.... ');
+	//console.log('Welcome!  Fetching your information.... ');
 	FB.api('/me?fields=id,name', function(response) {
-		console.log('Successful login for: ' + response.name);
-		console.log('Successful login for: ' + response.id);
-		$.post('http://localhost/ContactCI/Contact/permit',
+		//console.log('Successful login for: ' + response.name);
+		//console.log('Successful login for: ' + response.id);
+		$.post('http://163.15.192.212/ContactCI/Contact/permit',
 			{
 				id : response.id,
 			},function( data ) {				
 				if(data)
 				{
 					$("#login").hide();
+					document.getElementById('user').innerHTML = '<h3>用戶名稱：'+response.name+'</h3>';
 					$("#search").show();
 				}
 				else
 				{
-					document.getElementById('status').innerHTML = 'You are not the group member.';
+					console.log(data);
+					document.getElementById('status').innerHTML = '<h3>此帳號非系友社團成員，不能登入.</h3>';
 				}
 		});
 	});

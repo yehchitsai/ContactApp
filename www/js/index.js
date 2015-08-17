@@ -74,7 +74,7 @@ $(document).ready(function(){
 		$("#searchKey").empty().append("關鍵字："+$('#key').val());
 		var typeval = $('#type').val();
 		var keyval = $('#key').val();
-		$.post('http://localhost/ContactCI/Contact/namelist',
+		$.post('http://163.15.192.212/ContactCI/Contact/namelist',
 			{
 				type : typeval,
 				key : keyval
@@ -96,7 +96,7 @@ $(document).ready(function(){
 		if(event.target.id!='none'){
 			showloader();
 			var stuid = event.target.id;
-			$.post('http://localhost/ContactCI/Contact/detail',
+			$.post('http://163.15.192.212/ContactCI/Contact/detail',
 			{
 				stu_id : stuid
 			},function( data ){				
