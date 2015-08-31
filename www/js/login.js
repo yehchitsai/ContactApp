@@ -1,46 +1,23 @@
-(function(d, s, id){
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) {return;}
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/zh_TW/sdk.js";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-function login() {
-	FB.login(function(response) {
-		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
+function login(){
+	if (window.cordova.platformId == "browser") {
+        facebookConnectPlugin.browserInit(873678602720187,"v2.4");
+    }
+    facebookConnectPlugin.login( ["email"], 
+        function (response) { 
+			if (response.status === 'connected') {
+				permit();
+			} else if (response.status === 'not_authorized') {
+				document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+			} else {
+				document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+			} 
 		});
-	}, {scope: 'public_profile,email,user_friends',auth_type: 'rerequest'});
 }
-			
-// This is called with the results from from FB.getLoginStatus().
-function statusChangeCallback(response) {
-	console.log('statusChangeCallback');
-	console.log(response);
-	// The response object is returned with a status field that lets the
-	// app know the current login status of the person.
-	// Full docs on the response object can be found in the documentation
-	// for FB.getLoginStatus().
-	if (response.status === 'connected') {
-		// Logged into your app and Facebook.
-		permit();
-	} else if (response.status === 'not_authorized') {
-		// The person is logged into Facebook, but not your app.
-		document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-	} else {
-		// The person is not logged into Facebook, so we're not sure if
-		// they are logged into this app or not.
-		document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
-	}
-}
-			
+
 function permit() {
-	//console.log('Welcome!  Fetching your information.... ');
-	FB.api('/me?fields=id,name', function(response) {
-		//console.log('Successful login for: ' + response.name);
-		//console.log('Successful login for: ' + response.id);
-		$.post('http://163.15.192.212/ContactCI/Contact/permit',
+	facebookConnectPlugin.api( "me/?fields=id,name,email", ["user_birthday"],
+        function (response) { 
+			$.post('http://163.15.192.212/ContactCI/Contact/permit',
 			{
 				id : response.id,
 			},function( data ) {				
@@ -55,6 +32,6 @@ function permit() {
 					console.log(data);
 					document.getElementById('status').innerHTML = '<h3>此帳號非系友社團成員，不能登入.</h3>';
 				}
-		});
-	});
+			}); 
+		}); 
 }
