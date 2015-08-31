@@ -11,7 +11,7 @@ function login() {
 		FB.getLoginStatus(function(response) {
 			statusChangeCallback(response);
 		});
-	}, {scope: 'public_profile,email,user_likes',auth_type: 'rerequest'});
+	}, {scope: 'public_profile,email,user_friends',auth_type: 'rerequest'});
 }
 			
 // This is called with the results from from FB.getLoginStatus().
