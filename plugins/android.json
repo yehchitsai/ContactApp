@@ -35,6 +35,10 @@
                         {
                             "xml": "<access origin=\"https://*.akamaihd.net\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -64,6 +68,20 @@
                             "xml": "<activity android:label=\"@string/fb_app_name\" android:name=\"com.facebook.LoginActivity\" android:theme=\"@android:style/Theme.Translucent.NoTitleBar\" />",
                             "count": 1
                         }
+                    ],
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -76,6 +94,9 @@
         "com.phonegap.plugins.facebookconnect": {
             "APP_ID": "873678602720187",
             "APP_NAME": "ContactApp",
+            "PACKAGE_NAME": "edu.khusc.imd"
+        },
+        "cordova-plugin-contacts": {
             "PACKAGE_NAME": "edu.khusc.imd"
         }
     },

@@ -18,5 +18,13 @@
             "APP_ID": "873678602720187",
             "APP_NAME": "ContactApp"
         }
+    },
+    "cordova-plugin-contacts": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-contacts"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
