@@ -33,24 +33,28 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 		<!-- from contact souce code -->
-		<link type="text\css" rel="stylesheet" href="css\themes\default\jquery.mobile-1.2.1.min.css">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-		<script src="js\login.js"></script>
-		<script src="js\jquery-1.7.1.min.js"></script>
-		<script src="js\jquery.mobile-1.2.1.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.1.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">		
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<script src="js/jquery.mobile-1.2.1.min.js"></script>
         <title>Contact</title>
     </head>
 <body>
 	<div data-role="page">
+	
+		<!-- 頁首 -->
 		<div data-role="header">
 			<h3>系友追蹤系統</h3>
 		</div>
-	  
+		
+		<!-- app內容 -->
 		<div data-role="content">
+			<!-- 登錄畫面 -->
 			<div id="login">
 				<div align="center" data-role="fieldcontain">
 					<div onclick="login();"><img src="images\fb_login.png"></div>
 					
+					<!-- fb必要元件 -->
 					<div id="fb-root">
 					</div>
 					
@@ -60,53 +64,63 @@
 				</div>
 			</div>
 			
+			<!-- 查詢畫面 -->
 			<div id="search">	
 				<div id="user">
 				</div>
-				<div id="shipDiv" data-role="fieldcontain">
-					<label for="type">搜尋條件: </label></br>
+				
+				<div data-role="fieldcontain">
+					<label for="type">搜尋條件:</label></br>
 					<select id="type">
 						<option value="姓名">姓名</option>
 						<option value="級別">級別</option>
 						<option value="縣市">縣市</option>
 					</select>			
 				</div>
-				<div id="fnameDiv" data-role="fieldcontain">
-					<label for="key">關鍵字: </label></br>		
+				
+				<div data-role="fieldcontain">
+					<label for="key">關鍵字:</label>
+					</br>		
 					<input type="text" id="key" name="key"/>
-				</div>			
-				<div id="submitDiv" data-role="fieldcontain">    
+				</div>	
+				
+				<div data-role="fieldcontain">    
 					<a value="送出" id="submit" data-role="button" data-inline="true">送出</a>
 				</div>  
 			</div>
-		
+			
+			<!-- 顯示名單畫面 -->
 			<div id="list">
-				<h3 id="searchType">搜尋條件：</h3>
-				<h3 id="searchKey">關鍵字：</h3>
-				<a href="#" data-role="button" id="list_search" >回前頁</a>
-				<ul id="nameList" data-role="listview" data-inset="true"
-					data-theme="c" data-dividertheme="a">			   
+				<h3 id="searchType">搜尋條件:</h3>
+				<h3 id="searchKey">關鍵字:</h3>
+				<a href="#" data-role="button" id="list_search">回前頁</a>
+				
+				<ul id="nameList" data-role="listview" data-inset="true" data-theme="c" data-dividertheme="a">			   
 				</ul>	
 			</div>
-		
+			
+			<!-- 縣市詳細資料畫面 -->
 			<div id="result">
 				<div id="detail">
-				</div>			
+				</div>
+				
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" id ="result_list" data-role="button">回前頁</a>		
+					<a href="#" id="result_list" data-role="button">回前頁</a>		
 					<a href="#" id="result_search" data-role="button">回首頁</a>
 				</div>
 			</div>
 		
 		</div>  
- 
+		
+		<!-- 頁尾 -->
 		<div data-role="footer" data-position="fixed">
 			<h3>實踐大學高雄校區資訊管理系</h3>
 		</div>
 	</div>
 	
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
 		
     </body>
 </html>
