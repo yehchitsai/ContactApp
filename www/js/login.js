@@ -1,10 +1,15 @@
+//登錄fb
 function login(){
 	if (window.cordova.platformId == "browser") {
+		//指定app ID 和 api版本
         facebookConnectPlugin.browserInit(873678602720187,"v2.4");
     }
+	//登錄時向使用者索取額外權限
     facebookConnectPlugin.login( ["email"], 
         function (response) { 
+			//判斷登錄狀態
 			if (response.status === 'connected') {
+				//已登錄則呼叫判斷方法
 				permit();
 			} else if (response.status === 'not_authorized') {
 				document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
@@ -14,22 +19,27 @@ function login(){
 		});
 }
 
+//判斷是否為社團成員
 function permit() {
-	facebookConnectPlugin.api( "me/?fields=id,name,email", ["user_birthday"],
+	//實作api,此時也可索取額外權限
+	facebookConnectPlugin.api( "me/?fields=id,name", ["user_birthday"],
         function (response) { 
+			//將得到的id傳到server比對
 			$.post('http://163.15.192.212/ContactCI/Contact/permit',
 			{
 				id : response.id,
-			},function( data ) {				
+			},function( data ) {
+				//比對後結果	
 				if(data)
 				{
+					//為成員，開啟查詢功能並顯示使用者名稱
 					$("#login").hide();
 					document.getElementById('user').innerHTML = '<h3>用戶名稱：'+response.name+'</h3>';
 					$("#search").show();
 				}
 				else
 				{
-					console.log(data);
+					//非成員不能使用查詢功能
 					document.getElementById('status').innerHTML = '<h3>此帳號非系友社團成員，不能登入.</h3>';
 				}
 			}); 
