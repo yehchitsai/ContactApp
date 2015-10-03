@@ -90,12 +90,22 @@ $(document).ready(function(){
 		//宣告變數儲存查詢條件與關鍵字
 		var typeval = $('#type').val();
 		var keyval = $('#key').val();
+		
+		var submit_start = Date.now();//監控
+		
 		//使用post傳送到server進行查詢
 		$.post('http://163.15.192.212/ContactCI/Contact/namelist',
 			{
 				type : typeval,
 				key : keyval
 			},function( data ) {
+				//監控
+				var submit_end = Date.now();
+				var submit_total = submit_end - submit_start;
+				array[3] = submit_total/1000;
+				
+				var list_start = Date.now();//監控
+				
 				//用for讀取全部結果並加入清單內
 				var listItems = "<li id='none' data-role='list-divider' >搜尋結果</li>";
 				var list = JSON.parse(data);				
@@ -109,6 +119,12 @@ $(document).ready(function(){
 				$("#search").hide();
 				//顯示名單頁面
 				$("#list").show();
+				
+				//監控
+				var list_end = Date.now();
+				var list_total = list_end - list_start;
+				array[4] = list_total/1000;
+				
 				hideloader();	
 		});
 	});
@@ -120,11 +136,21 @@ $(document).ready(function(){
 			showloader();
 			//將觸發事件的id指定給變數stuid
 			var stuid = event.target.id;
+			
+			var info_start = Date.now();//監控
+			
 			//使用post傳送到server進行查詢
 			$.post('http://163.15.192.212/ContactCI/Contact/detail',
 			{
 				stu_id : stuid
-			},function( data ){	
+			},function( data ){
+				//監控
+				var info_end = Date.now();
+				var info_total = info_end - info_start;
+				array[5] = info_total/1000;
+				
+				var render_start = Date.now();//監控
+				
 				//將得到的結果制定給變數detail
 				var detail = JSON.parse(data);
 				//將系友的系上資料加到detailitem內
@@ -175,6 +201,11 @@ $(document).ready(function(){
 				}
 				
 				$("#detail").html(detailitem).trigger( "create" );	
+				
+				//監控
+				var render_end = Date.now();
+				var render_total = render_end - render_start;
+				array[6] = render_total/1000;
 			
 			});
 			//隱藏名單頁面
