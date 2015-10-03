@@ -4,6 +4,10 @@ function login(){
 		//指定app ID 和 api版本
         facebookConnectPlugin.browserInit(873678602720187,"v2.4");
     }
+	else if(!window.cordova){
+		//指定app ID 和 api版本
+        facebookConnectPlugin.browserInit(873678602720187,"v2.4");
+	}
 	//登錄時向使用者索取額外權限
     facebookConnectPlugin.login( ["email"], 
         function (response) { 
@@ -35,6 +39,7 @@ function permit() {
 					//為成員，開啟查詢功能並顯示使用者名稱
 					$("#login").hide();
 					document.getElementById('user').innerHTML = '<h3>用戶名稱：'+response.name+'</h3>';
+					update();
 					$("#search").show();
 				}
 				else
@@ -44,4 +49,17 @@ function permit() {
 				}
 			}); 
 		}); 
+}
+
+//成員登入後，送出Token更新系友資料
+function update(){
+	facebookConnectPlugin.getAccessToken( 
+        function (response) { 
+			$.post('http://163.15.192.212/ContactCI/Contact/update',
+				{
+					AccessToken : response
+				},function( data ) {
+					alert(data);
+			});
+		});
 }

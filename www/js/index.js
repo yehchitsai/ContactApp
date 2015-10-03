@@ -59,6 +59,16 @@ function showloader(){
 	});
 }
 
+//顯示檢測時的等候動畫
+function checkloader(){
+	$.mobile.loading( 'show', {
+		text: '檢測中',
+		textVisible: true,
+		theme: 'z',
+		html: ""
+	});
+}
+
 //隱藏等候動畫
 function hideloader(){			
 	$.mobile.loading('hide');
