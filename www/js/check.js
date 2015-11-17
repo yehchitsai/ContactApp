@@ -1,3 +1,4 @@
+/*
 var array = new Array();
 
 $("#check").click(function(){
@@ -9,3 +10,4 @@ $("#check").click(function(){
 			alert(data);
 		}); 	
 });
+*/
